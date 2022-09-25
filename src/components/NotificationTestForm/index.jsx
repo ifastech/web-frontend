@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
-import { Stack, Typography, TextField, Button } from "@mui/material";
+import { Stack, Typography, TextField, Button, styled } from "@mui/material";
 import "@fontsource/inter";
+import CircularProgress from "@mui/material/CircularProgress";
+
+const CustomTextField = styled(TextField)({
+  width: 350,
+});
+
+const CustomButton = styled(Button)(({ theme }) => ({
+  fontSize: 15,
+  fontWeight: 700,
+  fontFamily: "Inter",
+  backgroundColor: "#6C63FF",
+  "&:hover": {
+    backgroundColor: "#5C63FF",
+  },
+}));
 
 export default function NotificationTestForm() {
+  const [loading, setLoading] = useState(false);
   return (
-    <div className="NotificatonTestForm">
+    <React.Fragment>
       <Formik
         initialValues={{ deviceId: "", message: "" }}
         validate={(values) => {
@@ -51,7 +67,7 @@ export default function NotificationTestForm() {
               >
                 Notification Test
               </Typography>
-              <TextField
+              <CustomTextField
                 id="deviceId"
                 label="Device Id"
                 variant="outlined"
@@ -64,7 +80,7 @@ export default function NotificationTestForm() {
                 helperText={errors.deviceId || ""}
               />
 
-              <TextField
+              <CustomTextField
                 id="message"
                 label="Message"
                 variant="outlined"
@@ -77,25 +93,23 @@ export default function NotificationTestForm() {
                 helperText={errors.message || ""}
               />
 
-              <Button
-                variant="contained"
+              <CustomButton
                 type="submit"
-                disabled={isSubmitting}
-                // sx={{ width: "50%", left: "25%", top: "" }}
+                variant="contained"
+                onClick={handleSubmit}
+                disabled={loading}
                 sx={{
                   background: "#6C63FF",
                   width: "20%",
                   height: 55,
                 }}
-                onClick={handleSubmit}
               >
-                {" "}
-                Send Notification
-              </Button>
+                {loading ? <CircularProgress /> : "Send Notification"}
+              </CustomButton>
             </Stack>
           </form>
         )}
       </Formik>
-    </div>
+    </React.Fragment>
   );
 }

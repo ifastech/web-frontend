@@ -4,7 +4,7 @@ import BlackHorizontalBar from "../../components/BlackHorizontalBar";
 import DetailCard from "../../components/DetailCard";
 import UsersTable from "../../components/UserTable";
 import NotificationTestForm from "../../components/NotificationTestForm";
-import { Stack, Typography, TextField, Button } from "@mui/material";
+import { Stack, Typography, TextField, Button, styled } from "@mui/material";
 import "@fontsource/inter";
 
 const cartObjectList = [
@@ -36,18 +36,99 @@ const cartObjectList = [
     shipping: "free",
     initialQuantity: 1,
   },
+  {
+    description: "backpack",
+    color: "black",
+    price: 5200.0,
+    shipping: "free",
+    initialQuantity: 1,
+  },
+  {
+    description: "backpack",
+    color: "black",
+    price: 5200.0,
+    shipping: "free",
+    initialQuantity: 1,
+  },
+  {
+    description: "backpack",
+    color: "black",
+    price: 5200.0,
+    shipping: "free",
+    initialQuantity: 1,
+  },
+  {
+    description: "backpack",
+    color: "black",
+    price: 5200.0,
+    shipping: "free",
+    initialQuantity: 1,
+  },
+  {
+    description: "backpack",
+    color: "black",
+    price: 5200.0,
+    shipping: "free",
+    initialQuantity: 1,
+  },
+  {
+    description: "backpack",
+    color: "black",
+    price: 5200.0,
+    shipping: "free",
+    initialQuantity: 1,
+  },
+  {
+    description: "backpack",
+    color: "black",
+    price: 5200.0,
+    shipping: "free",
+    initialQuantity: 1,
+  },
+  {
+    description: "backpack",
+    color: "black",
+    price: 5200.0,
+    shipping: "free",
+    initialQuantity: 1,
+  },
+  {
+    description: "backpack",
+    color: "black",
+    price: 5200.0,
+    shipping: "free",
+    initialQuantity: 1,
+  },
+  {
+    description: "backpack",
+    color: "black",
+    price: 5200.0,
+    shipping: "free",
+    initialQuantity: 1,
+  },
+  {
+    description: "backpack",
+    color: "black",
+    price: 5200.0,
+    shipping: "free",
+    initialQuantity: 1,
+  },
+  {
+    description: "backpack",
+    color: "black",
+    price: 5200.0,
+    shipping: "free",
+    initialQuantity: 1,
+  },
 ];
+
+
+
 export default function Dashboard() {
   return (
     <React.Fragment>
       <Stack direction="column" spacing={8}>
-        <div
-          style={{
-            position: "Sticky",
-            top: "0%",
-            backgroundColor: "white",
-          }}
-        >
+        <div>
           <Stack direction="column" spacing={8}>
             <BlackHorizontalBar phrase={"Admin Dashboard"} />
             <Stack direction="row" justifyContent="center" spacing={10}>
@@ -67,6 +148,7 @@ export default function Dashboard() {
                 amount={200}
               ></DetailCard>
             </Stack>
+            <NotificationTestForm />
           </Stack>
         </div>
 
@@ -77,10 +159,7 @@ export default function Dashboard() {
             paddingBottom: 100,
           }}
         >
-          <Stack direction="column" spacing={2}>
-            <NotificationTestForm />
-            <UsersTable></UsersTable>
-          </Stack>
+          <UsersTable users={cartObjectList}></UsersTable>
         </div>
       </Stack>
     </React.Fragment>

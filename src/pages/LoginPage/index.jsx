@@ -19,31 +19,29 @@ const CustomTextField = styled(TextField)({
   width: 350,
 });
 
+const CustomButton = styled(Button)(({ theme }) => ({
+  // color: theme.palette.getContrastText([500]),
+  backgroundColor: "#6C63FF",
+  fontFamily: "Inter",
+  fontSize: 15,
+  fontWeight: 700,
+  "&:hover": {
+    backgroundColor: "#5C63FF",
+  },
+}));
+
 const validationSchema = Yup.object().shape({
-  email: Yup.string().required().label("email").min(3).max(36),
-  password: Yup.string()
+  email: Yup.string()
     .required()
-    .min(8)
-    .max(15)
-    .label("Password")
-    .matches(/\d+/, "Password should contain at least one number")
-    .matches(
-      /[a-z]+/,
-      "Password should contain at least one lowercase character"
-    )
-    .matches(
-      /[A-Z]+/,
-      "Password should contain at least one uppercase character"
-    )
-    .matches(
-      /[!@#$%^&*()-+]+/,
-      "Password should contain at least one special character"
-    ),
+    .email("Must be a valid email")
+    .label("email")
+    .min(3)
+    .max(36),
+  password: Yup.string().required().min(8).max(15).label("Password"),
 });
 
 export default function SignIn() {
-  //   const dispatch = useDispatch();
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
   const [openSnackBar, setOpenSnackBar] = useState(false);
@@ -55,12 +53,13 @@ export default function SignIn() {
   return (
     <div style={{ maxWidth: "100%" }}>
       <BlackHorizontalBar phrase="Ninety Camera" />
-      <HeightBox height={30} />
+      <HeightBox height={40} />
       <Stack direction="row" spacing={15}>
         <div style={{ paddingLeft: "100px", paddingTop: 50 }}>
           <h2 style={{ fontSize: 48, fontFamily: "Inter", margin: 0 }}>
             Welcome Back!
           </h2>
+          <HeightBox height={30} />
           <Stack direction="column" spacing={2}>
             <Formik
               initialValues={{
@@ -98,16 +97,17 @@ export default function SignIn() {
                       onChange={(event) => handleChange("password")(event)}
                     />
 
-                    <Button
+                    <CustomButton
                       type="submit"
                       variant="contained"
                       size="large"
                       onClick={handleSubmit}
+                      // onClick={()=> navigate("/dashboard")} //should remove later
                       disabled={loading}
                       sx={{ backgroundColor: "#6C63FF" }}
                     >
                       {loading ? <CircularProgress /> : "Sign In"}
-                    </Button>
+                    </CustomButton>
                   </React.Fragment>
                 );
               }}
@@ -125,7 +125,7 @@ export default function SignIn() {
           </div>
           <HeightBox height={15} />
         </div>
-        <div style={{ padding: "50px" }}>
+        <div style={{ padding: 100 }}>
           <img src={LOGIN_IMAGE} alt="" style={{ width: "40vw" }} />
         </div>
       </Stack>
