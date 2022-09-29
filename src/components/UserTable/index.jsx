@@ -33,29 +33,21 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const columns = [
-  { id: 'description', label: 'Description', minWidth: 170 },
-  { id: 'color', label: 'Color', minWidth: 100 },
+  { id: 'userID', label: 'User ID', minWidth: 170 },
+  { id: 'firstName', label: 'First Name', minWidth: 100 },
   {
-    id: 'initialQuantity',
-    label: 'Amount',
+    id: 'lastName',
+    label: 'Last Name',
     minWidth: 170,
-    align: 'right',
-    format: (value) => value.toLocaleString('en-US'),
+    
   },
   {
-    id: 'shipping',
-    label: 'Shipping',
+    id: 'email',
+    label: 'Primary email',
     minWidth: 170,
-    // align: 'left',
-    format: (value) => value.toLocaleString('en-US'),
+    
   },
-  {
-    id: 'price',
-    label: 'Price',
-    minWidth: 170,
-    align: 'right',
-    format: (value) => value.toFixed(2),
-  },
+  
 ];
 
 export default function UserTable(props) {

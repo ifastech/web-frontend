@@ -102,9 +102,10 @@ export default function SignIn() {
                       variant="contained"
                       size="large"
                       onClick={handleSubmit}
-                      // onClick={()=> navigate("/dashboard")} //should remove later
+                      onClick={()=> navigate("/dashboard")} //should remove later
                       disabled={loading}
                       sx={{ backgroundColor: "#6C63FF" }}
+                      
                     >
                       {loading ? <CircularProgress /> : "Sign In"}
                     </CustomButton>

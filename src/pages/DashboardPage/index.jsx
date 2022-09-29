@@ -7,123 +7,38 @@ import NotificationTestForm from "../../components/NotificationTestForm";
 import { Stack, Typography, TextField, Button, styled } from "@mui/material";
 import "@fontsource/inter";
 
-const cartObjectList = [
+const users = [
   {
-    description: "backpack",
-    color: "black",
-    price: 1500.0,
-    shipping: "free",
-    initialQuantity: 3,
+    userID: "1",
+    email: "user1@gamil.com",
+    firstName: "First",
+    lastName: "Last",
   },
   {
-    description: "backpack",
-    color: "black",
-    price: 1500.0,
-    shipping: "free",
-    initialQuantity: 1,
+    userID: "1",
+    email: "user1@gamil.com",
+    firstName: "First",
+    lastName: "Last",
   },
   {
-    description: "backpack",
-    color: "black",
-    price: 452.0,
-    shipping: "free",
-    initialQuantity: 2,
+    userID: "1",
+    email: "user1@gamil.com",
+    firstName: "First",
+    lastName: "Last",
   },
   {
-    description: "backpack",
-    color: "black",
-    price: 5200.0,
-    shipping: "free",
-    initialQuantity: 1,
+    userID: "1",
+    email: "user1@gamil.com",
+    firstName: "First",
+    lastName: "Last",
   },
   {
-    description: "backpack",
-    color: "black",
-    price: 5200.0,
-    shipping: "free",
-    initialQuantity: 1,
-  },
-  {
-    description: "backpack",
-    color: "black",
-    price: 5200.0,
-    shipping: "free",
-    initialQuantity: 1,
-  },
-  {
-    description: "backpack",
-    color: "black",
-    price: 5200.0,
-    shipping: "free",
-    initialQuantity: 1,
-  },
-  {
-    description: "backpack",
-    color: "black",
-    price: 5200.0,
-    shipping: "free",
-    initialQuantity: 1,
-  },
-  {
-    description: "backpack",
-    color: "black",
-    price: 5200.0,
-    shipping: "free",
-    initialQuantity: 1,
-  },
-  {
-    description: "backpack",
-    color: "black",
-    price: 5200.0,
-    shipping: "free",
-    initialQuantity: 1,
-  },
-  {
-    description: "backpack",
-    color: "black",
-    price: 5200.0,
-    shipping: "free",
-    initialQuantity: 1,
-  },
-  {
-    description: "backpack",
-    color: "black",
-    price: 5200.0,
-    shipping: "free",
-    initialQuantity: 1,
-  },
-  {
-    description: "backpack",
-    color: "black",
-    price: 5200.0,
-    shipping: "free",
-    initialQuantity: 1,
-  },
-  {
-    description: "backpack",
-    color: "black",
-    price: 5200.0,
-    shipping: "free",
-    initialQuantity: 1,
-  },
-  {
-    description: "backpack",
-    color: "black",
-    price: 5200.0,
-    shipping: "free",
-    initialQuantity: 1,
-  },
-  {
-    description: "backpack",
-    color: "black",
-    price: 5200.0,
-    shipping: "free",
-    initialQuantity: 1,
+    userID: "1",
+    email: "user1@gamil.com",
+    firstName: "First",
+    lastName: "Last",
   },
 ];
-
-
-
 export default function Dashboard() {
   return (
     <React.Fragment>
@@ -159,7 +74,7 @@ export default function Dashboard() {
             paddingBottom: 100,
           }}
         >
-          <UsersTable users={cartObjectList}></UsersTable>
+          <UsersTable users={users}></UsersTable>
         </div>
       </Stack>
     </React.Fragment>
