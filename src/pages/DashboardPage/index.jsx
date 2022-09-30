@@ -58,7 +58,7 @@ export default function Dashboard() {
                 amount={200}
               ></DetailCard>
               <DetailCard
-                color="#00FF47"
+                color="#5df57e"
                 phrase={"Total Detected Intrusions"}
                 amount={200}
               ></DetailCard>
