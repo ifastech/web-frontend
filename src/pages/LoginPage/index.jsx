@@ -51,7 +51,7 @@ export default function SignIn() {
   });
 
   return (
-    <div style={{ maxWidth: "100%" }}>
+    <div style={{ overflowY: "hidden" }}>
       <BlackHorizontalBar phrase="Ninety Camera" />
       <HeightBox height={40} />
       <Stack direction="row" spacing={15}>
@@ -81,7 +81,7 @@ export default function SignIn() {
                 return (
                   <React.Fragment>
                     <CustomTextField
-                      label="email"
+                      label="Email"
                       variant="outlined"
                       error={errors.email && touched.email}
                       helperText={errors.email || ""}
@@ -102,10 +102,8 @@ export default function SignIn() {
                       variant="contained"
                       size="large"
                       onClick={handleSubmit}
-                      onClick={()=> navigate("/dashboard")} //should remove later
                       disabled={loading}
                       sx={{ backgroundColor: "#6C63FF" }}
-                      
                     >
                       {loading ? <CircularProgress /> : "Sign In"}
                     </CustomButton>
@@ -115,15 +113,6 @@ export default function SignIn() {
             </Formik>
           </Stack>
 
-          <HeightBox height={15} />
-          <div style={{ fontSize: 15, width: 350 }}>
-            <Stack direction="row" justifyContent="center" spacing={1}>
-              {/* <p style={{ margin: 0 }}>Don't have an account?</p> */}
-              {/* <Link href="/forgetPassword" underline="hover" color="black">
-                Forget Password?
-              </Link> */}
-            </Stack>
-          </div>
           <HeightBox height={15} />
         </div>
         <div style={{ padding: 100 }}>

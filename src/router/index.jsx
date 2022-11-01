@@ -9,7 +9,6 @@ export default function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginPage />} />
-        {/* <Route path="/signUp" element={<SignUpPage/>}/> */}
         <Route path="/dashboard" element={<DashboardPage />} />
       </Routes>
     </BrowserRouter>
