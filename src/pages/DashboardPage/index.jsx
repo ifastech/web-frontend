@@ -1,45 +1,53 @@
-import React from "react";
-import { Formik } from "formik";
+import React, { useState, useEffect } from "react";
 import BlackHorizontalBar from "../../components/BlackHorizontalBar";
 import DetailCard from "../../components/DetailCard";
 import UsersTable from "../../components/UserTable";
 import NotificationTestForm from "../../components/NotificationTestForm";
-import { Stack, Typography, TextField, Button, styled } from "@mui/material";
+import { Stack } from "@mui/material";
 import "@fontsource/inter";
+import api from "../../api";
+import { TOKEN } from "../../constants";
+import { useNavigate } from "react-router-dom";
 
-const users = [
-  {
-    userID: "1",
-    email: "user1@gamil.com",
-    firstName: "First",
-    lastName: "Last",
-  },
-  {
-    userID: "1",
-    email: "user1@gamil.com",
-    firstName: "First",
-    lastName: "Last",
-  },
-  {
-    userID: "1",
-    email: "user1@gamil.com",
-    firstName: "First",
-    lastName: "Last",
-  },
-  {
-    userID: "1",
-    email: "user1@gamil.com",
-    firstName: "First",
-    lastName: "Last",
-  },
-  {
-    userID: "1",
-    email: "user1@gamil.com",
-    firstName: "First",
-    lastName: "Last",
-  },
-];
 export default function Dashboard() {
+  const naviagte = useNavigate();
+  const [totalDesktopUsers, setTotalDesktopUsers] = useState(0);
+  const [totalMobileUsers, setTotalMobileUsers] = useState(0);
+  const [totalIntrusions, setTotalIntrusions] = useState(0);
+  const [users, setAllUsers] = useState([]);
+
+  async function getData() {
+    try {
+      const responseDesktop = await api.system.getAllDesktopUsers();
+      if (responseDesktop?.data?.status === 200) {
+        setTotalDesktopUsers(responseDesktop?.data?.data);
+      }
+      const responseMobile = await api.system.getAllMobileUsers();
+      if (responseMobile?.data?.status === 200) {
+        setTotalMobileUsers(responseMobile?.data?.data);
+      }
+      const responseIntrusion = await api.system.getAllIntrusionCount();
+      if (responseIntrusion?.data?.status === 200) {
+        setTotalIntrusions(responseIntrusion?.data?.data);
+      }
+      const allUserRes = await api.system.getAllUsersWithDetails();
+      if (allUserRes?.data?.status === 200) {
+        setAllUsers(allUserRes?.data?.data);
+      }
+    } catch (error) {}
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  useEffect(() => {
+    const value = localStorage.getItem(TOKEN);
+    if (!value) {
+      naviagte("/");
+    }
+  }, []);
+
   return (
     <React.Fragment>
       <Stack direction="column" spacing={8}>
@@ -50,17 +58,17 @@ export default function Dashboard() {
               <DetailCard
                 color="#6C63FF"
                 phrase={"Total Active Desktop Users"}
-                amount={200}
+                amount={totalDesktopUsers}
               ></DetailCard>
               <DetailCard
                 color="#F50057"
                 phrase={"Total Active Mobile Users"}
-                amount={200}
+                amount={totalMobileUsers}
               ></DetailCard>
               <DetailCard
                 color="#5df57e"
                 phrase={"Total Detected Intrusions"}
-                amount={200}
+                amount={totalIntrusions}
               ></DetailCard>
             </Stack>
             <NotificationTestForm />

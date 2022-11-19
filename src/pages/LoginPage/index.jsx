@@ -6,7 +6,6 @@ import { Formik } from "formik";
 import { styled } from "@mui/system";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
-import Link from "@mui/material/Link";
 import LOGIN_IMAGE from "../../assets/login.svg";
 import { Stack } from "@mui/material";
 import HeightBox from "../../components/HeightBox";
@@ -14,13 +13,14 @@ import * as Yup from "yup";
 import SnackBarComponent from "../../components/SnackBarComponent";
 import BlackHorizontalBar from "../../components/BlackHorizontalBar";
 import "@fontsource/inter";
+import api from "../../api";
+import { TOKEN, USER_DETAILS } from "../../constants";
 
 const CustomTextField = styled(TextField)({
   width: 350,
 });
 
 const CustomButton = styled(Button)(({ theme }) => ({
-  // color: theme.palette.getContrastText([500]),
   backgroundColor: "#6C63FF",
   fontFamily: "Inter",
   fontSize: 15,
@@ -50,9 +50,39 @@ export default function SignIn() {
     message: "",
   });
 
+  async function loginUser(values) {
+    try {
+      setLoading(true);
+      const response = await api.user.signinUser(values);
+      if (response?.data?.status === 200) {
+        const user = response?.data?.data?.user;
+        localStorage.setItem(USER_DETAILS, JSON.stringify(user));
+        localStorage.setItem(TOKEN, "Bearer " + response?.data?.data?.token);
+        console.log("Response is: ", response);
+        navigate("/dashboard");
+      } else {
+        setSnackMessage({
+          type: "error",
+          message: "Invalid username or password",
+        });
+        setOpenSnackBar(true);
+      }
+    } catch (error) {
+      setSnackMessage({ type: "error", message: "Network error occured" });
+      setOpenSnackBar(true);
+    }
+    setLoading(false);
+  }
+
   return (
     <div style={{ overflowY: "hidden" }}>
       <BlackHorizontalBar phrase="Ninety Camera" />
+      <SnackBarComponent
+        open={openSnackBar}
+        message={snackMessage.message}
+        type={snackMessage.type}
+        setOpen={setOpenSnackBar}
+      />
       <HeightBox height={40} />
       <Stack direction="row" spacing={15}>
         <div style={{ paddingLeft: "100px", paddingTop: 50 }}>
@@ -71,6 +101,7 @@ export default function SignIn() {
                   email: values.email,
                   password: values.password,
                 };
+                loginUser(data);
               }}
               validationSchema={validationSchema}
             >

@@ -7,9 +7,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "@fontsource/inter";
-import { styled } from '@mui/material/styles';
-import { tableCellClasses } from '@mui/material/TableCell';
-import TablePagination from '@mui/material/TablePagination';
+import { styled } from "@mui/material/styles";
+import { tableCellClasses } from "@mui/material/TableCell";
+import TablePagination from "@mui/material/TablePagination";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -18,36 +18,21 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
-    
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  '&:nth-of-type(odd)': {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  '&:last-child td, &:last-child th': {
-    border: 0,
   },
 }));
 
 const columns = [
-  { id: 'userID', label: 'User ID', minWidth: 170 },
-  { id: 'firstName', label: 'First Name', minWidth: 100 },
+  { id: "firstName", label: "First Name", minWidth: 100 },
   {
-    id: 'lastName',
-    label: 'Last Name',
+    id: "lastName",
+    label: "Last Name",
     minWidth: 170,
-    
   },
   {
-    id: 'email',
-    label: 'Primary email',
+    id: "email",
+    label: "Primary email",
     minWidth: 170,
-    
   },
-  
 ];
 
 export default function UserTable(props) {
@@ -66,12 +51,12 @@ export default function UserTable(props) {
   };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{maxHeight: 340}}>
-      <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead >
-          <TableRow>
-            {columns.map((column) => (
+    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <TableContainer sx={{ maxHeight: 340 }}>
+        <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
                 <StyledTableCell
                   key={column.id}
                   align={column.align}
@@ -80,18 +65,20 @@ export default function UserTable(props) {
                   {column.label}
                 </StyledTableCell>
               ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {users.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {users
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
+                console.log(row);
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
+                          {column.format && typeof value === "number"
                             ? column.format(value)
                             : value}
                         </TableCell>
@@ -100,18 +87,18 @@ export default function UserTable(props) {
                   </TableRow>
                 );
               })}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    <TablePagination
-    rowsPerPageOptions={[10, 25, 100]}
-    component="div"
-    count={users.length}
-    rowsPerPage={rowsPerPage}
-    page={page}
-    onPageChange={handleChangePage}
-    onRowsPerPageChange={handleChangeRowsPerPage}
-  />
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={users.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
     </Paper>
   );
 }
