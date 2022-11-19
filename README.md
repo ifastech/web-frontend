@@ -17,3 +17,5 @@ Ninety Camera is a smart monitoring platform for security cameras which can dete
  - Run `npm i` to install the required packages
 
 ### `npm start` Command to execute the programme
+
+You can find the backend of this application in [here](https://github.com/Ninety-Camera/web-backend)
